@@ -1,0 +1,89 @@
+version: "3.9"
+
+services:
+  # FRONTEND (Next.js)
+  frontend:
+    build:
+      context: ./wms-frontend-next
+      dockerfile: Dockerfile
+    container_name: wms_frontend
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://backend:3000 
+    volumes:
+      - /app/node_modules
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  # BACKEND (Express.js)
+  backend:
+    build:
+      context: ./wms-backend-express
+      dockerfile: Dockerfile
+    container_name: wms_backend
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./wms-backend-express/.env
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    command: ["sh", "-c", "npm run db:create && npm run db:migrate && npm run db:seeds && npm start"]
+    restart: unless-stopped
+
+  # DATABASE (MySQL)
+  mysql:
+    image: mysql:lts
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # PHPMYADMIN
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  # REDIS
+  redis:
+    image: redis:latest
+    container_name: redis-container
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql-data:

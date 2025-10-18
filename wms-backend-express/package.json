@@ -1,0 +1,41 @@
+{
+  "name": "accessly-backend",
+  "type": "module",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node src/server.js",
+    "db:migrate": "set NODE_OPTIONS=-r @babel/register && sequelize-cli db:migrate",
+    "db:create": "set NODE_OPTIONS=-r @babel/register && sequelize-cli db:create",
+    "db:g:migration": "set NODE_OPTIONS=-r @babel/register && sequelize-cli migration:generate --name",
+    "db:reset": "set NODE_OPTIONS=-r @babel/register && sequelize-cli db:drop && set NODE_OPTIONS=-r @babel/register && sequelize-cli db:create && set NODE_OPTIONS=-r @babel/register && sequelize-cli db:migrate",
+    "db:g:seed": "set NODE_OPTIONS=-r @babel/register && sequelize-cli seed:generate --name",
+    "db:seeds": "set NODE_OPTIONS=-r @babel/register && sequelize-cli db:seed:all",
+    "db:reseed": "set NODE_OPTIONS=-r @babel/register && sequelize-cli db:drop && set NODE_OPTIONS=-r @babel/register && sequelize-cli db:create && set NODE_OPTIONS=-r @babel/register && sequelize-cli db:migrate && set NODE_OPTIONS=-r @babel/register && sequelize-cli db:seed:all"
+  },
+  "dependencies": {
+    "@types/multer": "^2.0.0",
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.2",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.19.2",
+    "express-session": "^1.17.3",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.9.7",
+    "passport": "^0.6.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "redis": "^5.8.2",
+    "sequelize": "^6.37.7"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.4",
+    "@babel/node": "^7.28.0",
+    "@babel/preset-env": "^7.28.3",
+    "@babel/register": "^7.28.3",
+    "@types/multer": "^1.4.12",
+    "sequelize-cli": "^6.6.3"
+  }
+}
