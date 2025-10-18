@@ -45,7 +45,7 @@ JWT_SECRET=supersecret
 ### 2. Frontend (`wms-frontend-next/.env`)
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:3000
-PORT=3002 
+PORT=3001
 NODE_ENV=production
 ```
 
