@@ -10,7 +10,7 @@ Semua service dikelola dengan **Docker Compose**.
 
 ---
 
-## Demo deploy in AWS EC2 ##
+## Demo deploy in AWS EC2 .##
 - Link : http://13.213.17.201:3001
 
 # 🔐 Login Accounts
