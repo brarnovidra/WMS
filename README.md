@@ -10,6 +10,23 @@ Semua service dikelola dengan **Docker Compose**.
 
 ---
 
+## Demo deploy in AWS EC2 ##
+- Link : http://13.213.17.201:3001
+
+# 🔐 Login Accounts
+
+Gunakan akun berikut untuk login ke aplikasi:
+
+### 👑 Admin
+- **Username**: `admin`
+- **Password**: `admin`
+
+### 🙋 User
+- **Username**: `user`
+- **Password**: `user`
+
+---
+
 ## 🚀 Prerequisites
 
 Pastikan sudah ter-install:
@@ -104,19 +121,6 @@ npm run db:seeds
   Jika ingin PostgreSQL, sesuaikan bagian `db` di `docker-compose.yml` dan config Sequelize.
 - Pastikan sudah mengisi **OAuth Credentials** di `.env`.
 
-# 🔐 Login Accounts
-
-Gunakan akun berikut untuk login ke aplikasi:
-
-### 👑 Admin
-- **Username**: `admin`
-- **Password**: `admin`
-
-### 🙋 User
-- **Username**: `user`
-- **Password**: `user`
-
----
 
 ## Essay
 - 1. Solusi untuk mengetahui produk yang low stock
